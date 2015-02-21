@@ -7,13 +7,15 @@ import org.json4s.JValue
 import org.json4s.JsonAST.{JString, JArray}
 import org.json4s.jackson.JsonMethods._
 
+import scala.language.implicitConversions
+
 object Combo {
   case class Config(host: String, port: Option[Int], scheme: Option[String])
   case class Topic(path: String*) {
     override def toString = path.mkString("/")
   }
   object Topic {
-    def fromString(string: String): Topic = Topic(string.split("/"): _*)
+    implicit def fromString(string: String): Topic = Topic(string.split("/"): _*)
   }
 }
 class Combo(val config: Combo.Config, val actorSystem: ActorSystem) {
@@ -53,8 +55,7 @@ class Combo(val config: Combo.Config, val actorSystem: ActorSystem) {
   }
 
   def add(topic: Combo.Topic, data: JValue): Future[Throwable] = {
-    val request = url(factsPath(topic)).POST
-    request << compact(render(data))
+    val request = url(factsPath(topic)).POST << compact(render(data))
     Http(request OK as.String).failed
   }
 }
