@@ -26,14 +26,15 @@ class TopicActor(targetActor: ActorRef, combo: Combo, topic: Combo.Topic) extend
         case Failure(ex) => throw ex
       }
     case Next(sub_id) =>
-      Http(url(combo.subscriptionNext(topic, sub_id)) OK as.String).map(parse(_)).map { (msg) =>
-        targetActor ! Fact(topic, msg.toSome)
-      }.andThen { case _ => self ! Next(sub_id) }
+      Http(url(combo.subscriptionNext(topic, sub_id)) OK as.String)
+        .map(parse(_))
+        .map((msg) => targetActor ! Fact(topic, msg))
+        .andThen { case _ => self ! Next(sub_id) }
   }
 }
 object TopicActor {
   case object First
   case class Next(sub_id: String)
 
-  case class Fact(topic: Topic, data: Option[JValue])
+  case class Fact(topic: Topic, data: JValue)
 }
