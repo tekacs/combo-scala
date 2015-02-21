@@ -17,6 +17,9 @@ object Combo {
   object Topic {
     implicit def fromString(string: String): Topic = Topic(string.split("/"): _*)
   }
+  case class Fact(topic: Topic, data: JValue) {
+    def this(topic: Topic, data: String) = this(topic, parse(data))
+  }
 }
 class Combo(val config: Combo.Config, val actorSystem: ActorSystem) {
   import com.tekacs.combo.Combo._
@@ -53,6 +56,8 @@ class Combo(val config: Combo.Config, val actorSystem: ActorSystem) {
     actor ! TopicActor.First
     actor
   }
+
+  def add(fact: Fact): Future[Throwable] = add(fact.topic, fact.data)
 
   def add(topic: Combo.Topic, data: JValue): Future[Throwable] = {
     val request = url(factsPath(topic)).POST << compact(render(data))
