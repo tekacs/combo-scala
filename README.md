@@ -21,6 +21,8 @@ That's it! Just:
 
 ## Config
 
+To ensure that messages come in, list the topics you wish to subscribe to in `combo.topics` in `src/main/resources/application.conf`.
+
 ```
 combo {
   host = somehost.website.com
@@ -33,5 +35,3 @@ combo {
   ]
 }
 ```
-
-To ensure that messages come in, list the topics you wish to subscribe to in `combo.topics` in `src/main/resources/application.conf`.
