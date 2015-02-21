@@ -29,9 +29,9 @@ To ensure that messages come in, list the topics you wish to subscribe to in `co
 
 ```
 combo {
+  scheme = http
   host = somehost.website.com
   port = 8000
-  scheme = http
 
   topics = [
     request_topic
