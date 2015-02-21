@@ -10,7 +10,6 @@ It's as simple as (in MainReceiver):
 def receive: Receive = {
   case Fact(Topic("request_topic"), json) =>
     sender ! Fact("response_topic", json \ "some_field")
-  case _ => ???
 }
 ```
 
