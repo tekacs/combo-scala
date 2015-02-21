@@ -21,7 +21,11 @@ That's it! Just:
 
 ## Config
 
-To ensure that messages come in, list the topics you wish to subscribe to in `combo.topics` in `src/main/resources/application.conf`.
+Configuration is specified in `src/main/resources/application.conf`.
+
+Specify the combo `scheme`, `host` and `port`.
+
+To ensure that messages come in, list the topics you wish to subscribe to in `combo.topics`.
 
 ```
 combo {
