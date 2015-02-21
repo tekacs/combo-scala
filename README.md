@@ -16,6 +16,7 @@ def receive: Receive = {
 That's it! Just:
 - pattern match on an incoming `Fact(topic: Topic, data: JValue)`
 - respond to sender with as many `Fact(topic, data)` objects as you like.
+  (hint: if you send Fact(topic, """{"some_json": "value"}"""), the string is automatically parsed as JSON)
 
 ## Config
 
