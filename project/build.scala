@@ -40,7 +40,7 @@ object build extends Build {
   )
   .dependsOn(shared, macros)
   .settings(
-    version := "0.0.1",
+    version := "0.1.0",
     libraryDependencies ++= Seq(
     )
   )
