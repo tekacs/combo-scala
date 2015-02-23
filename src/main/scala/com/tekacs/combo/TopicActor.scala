@@ -12,7 +12,7 @@ class TopicActor(targetActor: ActorRef, combo: Combo, topic: Combo.Topic) extend
   import com.tekacs.combo.Combo._
   import com.tekacs.combo.TopicActor._
 
-  override def receive: Receive = {
+  override def receive = {
     case First =>
       log.info(s"Subscribed to $topic")
       Http(url(combo.subscriptionBase(topic)).POST OK as.String).map(parse(_)).map {
