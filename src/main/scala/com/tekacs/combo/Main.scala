@@ -17,7 +17,12 @@ object Main extends App {
     }
   }
   import scala.concurrent.ExecutionContext.Implicits.global
-  application.scheduler.schedule(0.seconds, 1.millisecond, application.actorOf(Props[TempActor]), new Fact("test", s"""{"tick": ${System.nanoTime}}"""))
+  application.scheduler.schedule(
+    0.seconds,
+    1.millisecond,
+    application.actorOf(Props[TempActor]),
+    new Fact("test", s"""{"tick": ${System.nanoTime}}""")
+  )
 
   Runtime.getRuntime.addShutdownHook(new Thread(new Runnable {
     override def run() = {
