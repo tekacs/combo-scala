@@ -8,9 +8,7 @@ import scala.concurrent.duration._
 object Main extends App {
   import com.tekacs.combo.Context._
 
-  val actors = topics.map { topic =>
-    combo.subscribe(Combo.Topic.fromString(topic), mainActor)
-  }.toList
+  val actors = topics.map(topic => combo.subscribe(Combo.Topic.fromString(topic), mainActor))
 
   class TempActor extends Actor with ActorLogging {
     def receive = {
